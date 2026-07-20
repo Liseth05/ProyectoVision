@@ -5,7 +5,9 @@ import cv2
 from collections import Counter
 
 #Ruta interna de mis archivos
-ruta_dataset = "/content"
+ruta_dataset = r"D:\PROYECTO\DOCUMENTACION\DATASET"
+excluir = ("Metadata",)
+
 #Extensiones de imagenes que pueden exitir en el dataset
 extensiones = ('.jpg', '.jpeg', '.png', '.bmp')
 #Almacenamos los datos e inicializamos el conteo de imagenes de cada instancia
@@ -22,10 +24,10 @@ print("=" * 50)
 for carpeta in os.listdir(ruta_dataset):
 
     ruta_carpeta = os.path.join(ruta_dataset, carpeta)
-    #Quitar las carpetas ocultas por defecto de colab
+    #Quitar las carpetas que no son clases
     if (
         os.path.isdir(ruta_carpeta)
-        and carpeta != "sample_data"
+        and carpeta not in excluir
         and not carpeta.startswith(".")
     ):
         clases.append(carpeta)
