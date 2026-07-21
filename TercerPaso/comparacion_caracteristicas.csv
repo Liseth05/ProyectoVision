@@ -1,0 +1,4 @@
+Metodo,Numero_caracteristicas,Formato,Tiempo_promedio_segundos
+Hu,7.0,Vector 7 valores,0.002041
+SIFT,4763.71,Descriptores SIFT 128 dimensiones,0.34042
+ORB,1000.06,Descriptores ORB binarios,0.045429

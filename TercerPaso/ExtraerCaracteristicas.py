@@ -167,3 +167,84 @@ for clase in clases:
     print(
         f"{clase}: {contador} imágenes realizadas"
     )
+#ALMACENAMOS LA INFORMACION EN DATAFRAMES
+df_hu = pd.DataFrame(datos_hu)
+df_sift = pd.DataFrame(datos_sift)
+df_orb = pd.DataFrame(datos_orb)
+df_tiempos = pd.DataFrame(tiempos)
+#ALMACENAR EN UN CSV
+df_hu.to_csv(
+    os.path.join(carpeta_salida, "dataset_HU.csv"),
+    index=False
+)
+df_sift.to_csv(
+    os.path.join(carpeta_salida, "dataset_SIFT.csv"),
+    index=False
+)
+df_orb.to_csv(
+    os.path.join(carpeta_salida, "dataset_ORB.csv"),
+    index=False
+)
+df_tiempos.to_csv(
+    os.path.join(carpeta_salida, "tiempos_extraccion.csv"),
+    index=False
+)
+#RESULTADOS
+print("\n")
+print("*"*70)
+print("RESULTADOS DEL PROCESAMIENTO")
+print("*"*70)
+comparacion = pd.DataFrame({
+    "Metodo":[
+        "Hu",
+        "SIFT",
+        "ORB"
+    ],
+    "Numero_caracteristicas":[
+        7,
+        round(
+            df_sift["Keypoints_SIFT"].mean(),
+            2
+        ),
+        round(
+            df_orb["Keypoints_ORB"].mean(),
+            2
+        )
+    ],
+    "Formato":[
+        "Vector 7 valores",
+        "Descriptores SIFT 128 dimensiones",
+        "Descriptores ORB binarios"
+    ],
+    "Tiempo_promedio_segundos":[
+        round(
+            df_tiempos["Tiempo_HU"].mean(),
+            6
+        ),
+        round(
+            df_tiempos["Tiempo_SIFT"].mean(),
+            6
+        ),
+        round(
+            df_tiempos["Tiempo_ORB"].mean(),
+            6
+        )
+    ]
+})
+print(comparacion)
+comparacion.to_csv(
+    os.path.join(carpeta_salida, "comparacion_caracteristicas.csv"),
+    index=False
+)
+print("\n")
+print("ARCHIVOS GENERADOS:")
+print("-------------------")
+print("dataset_HU.csv")
+print("dataset_SIFT.csv")
+print("dataset_ORB.csv")
+print("tiempos_extraccion.csv")
+print("comparacion_caracteristicas.csv")
+print("\nTotal imágenes realizadas:")
+print(
+    len(df_hu)
+)
