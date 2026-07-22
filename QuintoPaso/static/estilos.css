@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #f2f5f9;
+    color: #21295c;
+}
+
+header {
+    background-color: #21295c;
+    color: white;
+    padding: 24px 40px;
+}
+
+header h1 {
+    margin: 0 0 6px 0;
+    font-size: 24px;
+}
+
+header p {
+    margin: 0;
+    color: #cadcfc;
+    font-size: 14px;
+}
+
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.tarjeta {
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(33, 41, 92, 0.08);
+}
+
+.tarjeta h2 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #1c7293;
+}
+
+form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+button {
+    background-color: #1c7293;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #065a82;
+}
+
+.error {
+    color: #c0392b;
+    font-weight: bold;
+}
+
+.tarjetas-modelos {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+}
+
+.modelo-card {
+    flex: 1;
+    min-width: 150px;
+    background: #e8f1f5;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+}
+
+.modelo-card h3 {
+    margin: 0 0 8px 0;
+    color: #065a82;
+}
+
+.clase-predicha {
+    font-size: 20px;
+    font-weight: bold;
+    color: #21295c;
+    margin: 0;
+}
+
+.confianza {
+    font-size: 12px;
+    color: #44526b;
+    margin: 4px 0 0 0;
+}
+
+.coincidencia {
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.coincidencia.ok {
+    background-color: #e3f6e8;
+    color: #1c7293;
+}
+
+.coincidencia.distinto {
+    background-color: #fdf1e0;
+    color: #a05a00;
+}
+
+.descripcion {
+    font-size: 13px;
+    color: #44526b;
+}
+
+table.tabla-resultados {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+table.tabla-resultados th {
+    background-color: #21295c;
+    color: white;
+    padding: 8px;
+    text-align: left;
+}
+
+table.tabla-resultados td {
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #7a869a;
+    font-size: 12px;
+}
