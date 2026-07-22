@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import psutil
 import joblib
+import json
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -258,6 +259,24 @@ tabla.to_csv(
     os.path.join(carpeta_salida, "comparacion_clasificadores.csv"),
     index=False
 )
+
+##
+# Guardamos SVM, Random Forest y el scaler directo en QuintoPaso
+carpeta_web = r"D:\PROYECTO\QuintoPaso"
+os.makedirs(carpeta_web, exist_ok=True)
+
+joblib.dump(svm, os.path.join(carpeta_web, "svm_model.pkl"))
+joblib.dump(rf, os.path.join(carpeta_web, "rf_model.pkl"))
+joblib.dump(scaler, os.path.join(carpeta_web, "scaler.pkl"))
+
+# Guardamos las clases en el mismo orden que usa el modelo (mismo formato que usa la CNN)
+clases_clasico = sorted(list(set(y)))
+with open(os.path.join(carpeta_web, "clases_clasico.json"), "w") as f:
+    json.dump(clases_clasico, f)
+
+print("SVM, Random Forest y scaler guardados en:", carpeta_web)
+##
+
 # Memoria utilizada
 ram=psutil.virtual_memory().used/1024/1024
 print("\nCosto computacional")
@@ -271,11 +290,3 @@ print(
     round(ram,2),
     "MB"
 )
-
-#GUARDAMOS LOS MODELOS PARA USARLOS DESPUES EN LA APP WEB
-joblib.dump(svm, os.path.join(carpeta_salida, "svm_model.pkl"))
-joblib.dump(rf, os.path.join(carpeta_salida, "rf_model.pkl"))
-joblib.dump(scaler, os.path.join(carpeta_salida, "scaler.pkl"))
-print("\nModelos guardados en:", carpeta_salida)
-
-print("\nProceso terminado")

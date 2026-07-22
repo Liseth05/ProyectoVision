@@ -15,6 +15,7 @@ from tensorflow.keras.layers import (
     Dense,
     Dropout
 )
+
 from tensorflow.keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import (
@@ -272,3 +273,4 @@ print("\nTiempo de predicción:",
       "segundos")
 print("\nModelos guardados en:", carpeta_salida)
 print("\nFINALIZACION")
+
