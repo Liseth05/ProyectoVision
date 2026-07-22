@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clasificación de Imágenes Faciales - Proyecto Final</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Clasificación de Imágenes Faciales por Grupo Poblacional</h1>
+        <p>Comparación de modelos: SVM · Random Forest · CNN</p>
+    </header>
+
+    <main>
+
+        <section class="tarjeta">
+            <h2>1. Sube una imagen nueva</h2>
+            <form action="/predecir" method="post" enctype="multipart/form-data">
+                <input type="file" name="imagen" accept="image/*" required>
+                <button type="submit">Predecir clase</button>
+            </form>
+
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </section>
+
+        {% if resultado %}
+        <section class="tarjeta">
+            <h2>2. Resultado de la predicción — {{ resultado.imagen }}</h2>
+            <div class="tarjetas-modelos">
+                <div class="modelo-card">
+                    <h3>SVM</h3>
+                    <p class="clase-predicha">{{ resultado.svm }}</p>
+                    <p class="confianza">Confianza: {{ resultado.confianza_svm }}%</p>
+                </div>
+                <div class="modelo-card">
+                    <h3>Random Forest</h3>
+                    <p class="clase-predicha">{{ resultado.rf }}</p>
+                    <p class="confianza">Confianza: {{ resultado.confianza_rf }}%</p>
+                </div>
+                <div class="modelo-card">
+                    <h3>CNN</h3>
+                    <p class="clase-predicha">{{ resultado.cnn }}</p>
+                    <p class="confianza">Confianza: {{ resultado.confianza_cnn }}%</p>
+                </div>
+            </div>
+
+            {% if resultado.svm == resultado.rf and resultado.rf == resultado.cnn %}
+                <p class="coincidencia ok">Los tres modelos coinciden en la misma clase.</p>
+            {% else %}
+                <p class="coincidencia distinto">Los modelos NO coinciden entre sí — esto es esperable si la imagen pertenece a una clase con pocos datos de entrenamiento (Europeos o Indígenas).</p>
+            {% endif %}
+        </section>
+        {% endif %}
+
+        <section class="tarjeta">
+            <h2>3. Comparación de resultados del entrenamiento</h2>
+            <p class="descripcion">
+                Estas son las métricas obtenidas al entrenar cada modelo, medidas sobre
+                el conjunto de prueba durante el entrenamiento.
+            </p>
+            {{ tabla_html | safe }}
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Proyecto Final · Visión por Computador · Liseth Pushug, Ronny Catucuago</p>
+    </footer>
+
+</body>
+</html>
